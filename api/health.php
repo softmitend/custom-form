@@ -45,8 +45,12 @@ $result = [
     'asset_url' => getenv('ASSET_URL') ?: null,
     'home_render_ok' => false,
     'home_render_status' => null,
+    'home_css_links' => [],
+    'home_contains_vite_css' => false,
     'form_render_ok' => false,
     'form_render_status' => null,
+    'form_css_links' => [],
+    'form_contains_vite_css' => false,
 ];
 
 if ($result['vite_manifest_exists']) {
@@ -129,8 +133,13 @@ try {
             try {
                 $request = Request::create($path, 'GET');
                 $response = $app->handle($request);
+                $content = (string) $response->getContent();
                 $result[$key.'_render_status'] = $response->getStatusCode();
                 $result[$key.'_render_ok'] = $response->getStatusCode() < 500;
+                preg_match_all('/<link[^>]+href=["\']([^"\']+\.css[^"\']*)["\']/i', $content, $matches);
+                $result[$key.'_css_links'] = $matches[1] ?? [];
+                $result[$key.'_contains_vite_css'] = collect($result['vite_css_files'])
+                    ->contains(fn (string $cssFile): bool => str_contains($content, $cssFile));
             } catch (Throwable $exception) {
                 $result[$key.'_render_error'] = $exception::class.': '.$exception->getMessage();
             }
