@@ -9,6 +9,19 @@ export default defineConfig({
             refresh: true,
         }),
         tailwindcss(),
+        {
+            name: 'secure-svg-namespaces',
+            generateBundle(_, bundle) {
+                for (const asset of Object.values(bundle)) {
+                    if (asset.type === 'asset' && typeof asset.source === 'string') {
+                        asset.source = asset.source.replaceAll(
+                            'http://www.w3.org/2000/svg',
+                            'https://www.w3.org/2000/svg',
+                        );
+                    }
+                }
+            },
+        },
     ],
     server: {
         watch: {
