@@ -10,6 +10,7 @@
 }
 
 :root {
+    --secure-build-token: 20260723;
     --bs-font-sans-serif: var(--font-sans);
     --bs-body-font-family: var(--font-sans);
     --ink: #1f2d3a;
