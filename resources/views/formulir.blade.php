@@ -76,7 +76,7 @@
 
     <main class="form-request-page">
         <section class="form-request-card" aria-labelledby="form-title">
-            <a class="back-link" href="{{ url('/') }}">Kembali ke halaman awal</a>
+            <a class="back-link" href="/">Kembali ke halaman utama</a>
 
             @if (session('success'))
                 <div class="success-alert" role="status">
@@ -130,7 +130,7 @@
                     </ol>
                 </aside>
 
-                <form class="request-form" action="{{ route('website-project-requests.store') }}" method="post" data-submission-form>
+                <form class="request-form" action="/formulir" method="post" data-submission-form>
                     @csrf
 
                     <x-form.section

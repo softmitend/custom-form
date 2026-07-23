@@ -47,10 +47,12 @@ $result = [
     'home_render_status' => null,
     'home_css_links' => [],
     'home_contains_vite_css' => false,
+    'home_insecure_urls' => [],
     'form_render_ok' => false,
     'form_render_status' => null,
     'form_css_links' => [],
     'form_contains_vite_css' => false,
+    'form_insecure_urls' => [],
 ];
 
 if ($result['vite_manifest_exists']) {
@@ -137,9 +139,11 @@ try {
                 $result[$key.'_render_status'] = $response->getStatusCode();
                 $result[$key.'_render_ok'] = $response->getStatusCode() < 500;
                 preg_match_all('/<link[^>]+href=["\']([^"\']+\.css[^"\']*)["\']/i', $content, $matches);
+                preg_match_all('/http:\/\/[^"\'>\s)]+/i', $content, $insecureMatches);
                 $result[$key.'_css_links'] = $matches[1] ?? [];
                 $result[$key.'_contains_vite_css'] = collect($result['vite_css_files'])
                     ->contains(fn (string $cssFile): bool => str_contains($content, $cssFile));
+                $result[$key.'_insecure_urls'] = array_values(array_unique($insecureMatches[0] ?? []));
             } catch (Throwable $exception) {
                 $result[$key.'_render_error'] = $exception::class.': '.$exception->getMessage();
             }

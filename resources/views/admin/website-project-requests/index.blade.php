@@ -12,7 +12,7 @@
             <div class="admin-content">
                 <div class="admin-topbar">
                     <div>
-                        <a class="admin-back-link" href="{{ url('/') }}">Halaman utama</a>
+                        <a class="admin-back-link" href="/">Halaman utama</a>
                         <h1 id="admin-title">Dashboard Respon Form</h1>
                         <p>Pantau semua kebutuhan website yang masuk dari halaman formulir.</p>
                     </div>

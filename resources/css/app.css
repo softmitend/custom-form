@@ -3004,3 +3004,158 @@ strong {
         grid-template-columns: 1fr;
     }
 }
+
+/* Final responsive polish */
+.site-footer {
+    justify-content: center;
+    text-align: center;
+}
+
+.site-footer span:first-child {
+    color: #8a94a3;
+    font-weight: 400;
+    font-style: italic;
+}
+
+.form-request-card > .back-link,
+.admin-back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    width: fit-content;
+    min-height: 2.1rem;
+    margin-bottom: 0.9rem;
+    padding: 0.42rem 0.72rem;
+    border: 1px solid rgba(31, 45, 58, 0.1);
+    border-radius: 999px;
+    color: #667085;
+    background: rgba(255, 255, 255, 0.78);
+    font-size: 0.78rem;
+    font-weight: 500;
+    line-height: 1;
+    text-decoration: none;
+    box-shadow: none;
+}
+
+.form-request-card > .back-link {
+    position: static;
+    z-index: auto;
+    height: auto;
+    justify-content: flex-start;
+}
+
+.form-request-card > .back-link::before,
+.admin-back-link::before {
+    content: "←";
+    font-size: 0.9rem;
+    line-height: 1;
+}
+
+.form-request-card > .back-link:hover,
+.form-request-card > .back-link:focus,
+.admin-back-link:hover,
+.admin-back-link:focus {
+    color: var(--aqua-deep);
+    border-color: rgba(8, 170, 165, 0.22);
+    background: rgba(217, 244, 255, 0.55);
+}
+
+@media (max-width: 900px) {
+    .landing-shell {
+        padding: clamp(0.85rem, 3vw, 1.25rem);
+        place-items: center;
+    }
+
+    .landing-card {
+        min-height: auto;
+        border-radius: 14px;
+    }
+
+    .site-footer {
+        align-items: center;
+        padding: 1.4rem 1rem 1.6rem;
+    }
+
+    .form-request-page {
+        padding: 1.1rem clamp(0.85rem, 4vw, 1.5rem) 1.75rem;
+    }
+
+    .form-request-card {
+        min-height: auto;
+        border-radius: 12px;
+    }
+
+    .form-request-heading,
+    .form-guide,
+    .request-section {
+        border-radius: 8px;
+    }
+
+    .admin-page {
+        padding: 1rem clamp(0.85rem, 4vw, 1.35rem) 1.5rem;
+    }
+
+    .admin-shell,
+    .admin-detail-shell {
+        padding: 0.8rem;
+        border-width: 1px;
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.68);
+        box-shadow: 0 10px 28px rgba(68, 58, 122, 0.1);
+        backdrop-filter: blur(10px);
+    }
+}
+
+@media (max-width: 520px) {
+    .landing-shell {
+        padding: 0.8rem;
+    }
+
+    .landing-card {
+        border-radius: 12px;
+    }
+
+    .hero-band,
+    .content-panel {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .form-request-page {
+        padding: 0.85rem 0.75rem 1.4rem;
+    }
+
+    .form-request-card {
+        border-radius: 10px;
+    }
+
+    .form-request-heading,
+    .form-guide,
+    .request-section,
+    .submission-note {
+        border-radius: 8px;
+    }
+
+    .form-request-card > .back-link,
+    .admin-back-link {
+        min-height: 2rem;
+        padding: 0.38rem 0.65rem;
+        font-size: 0.76rem;
+    }
+
+    .admin-page {
+        padding: 0.75rem 0.7rem 1.25rem;
+    }
+
+    .admin-shell,
+    .admin-detail-shell {
+        padding: 0.7rem;
+        border-radius: 10px;
+    }
+
+    .admin-topbar,
+    .admin-panel,
+    .admin-detail-card {
+        border-radius: 8px;
+    }
+}

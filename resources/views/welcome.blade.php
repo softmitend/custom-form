@@ -68,7 +68,7 @@
                     </div>
 
                     <div class="cta-actions">
-                        <a class="primary-cta" href="{{ url('/formulir') }}">Buat websitemu sekarang</a>
+                        <a class="primary-cta" href="/formulir">Buat websitemu sekarang</a>
                     </div>
                 </section>
             </div>

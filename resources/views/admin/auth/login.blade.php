@@ -9,7 +9,7 @@
 <body>
     <main class="admin-login-page">
         <section class="admin-login-card" aria-labelledby="login-title">
-            <a class="admin-back-link" href="{{ url('/') }}">Halaman utama</a>
+            <a class="admin-back-link" href="/">Halaman utama</a>
             <p class="eyebrow">Admin area</p>
             <h1 id="login-title">Masuk ke Dashboard</h1>
             <p class="admin-login-copy">Gunakan akun admin untuk membaca dan mengelola respon formulir website.</p>
