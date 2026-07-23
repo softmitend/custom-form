@@ -69,14 +69,12 @@
 
                     <div class="cta-actions">
                         <a class="primary-cta" href="{{ url('/formulir') }}">Buat websitemu sekarang</a>
-                        <span>Gratis konsultasi kebutuhan awal</span>
                     </div>
                 </section>
             </div>
 
             <footer class="site-footer">
                 <span>@acalysis</span>
-                <a href="mailto:softmitend@gmail.com">softmitend@gmail.com</a>
                 <span>Website custom, dibuat lebih personal.</span>
             </footer>
         </section>
