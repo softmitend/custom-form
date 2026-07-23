@@ -37,6 +37,9 @@ $result = [
     'form_requests_query_ok' => false,
     'vite_manifest_exists' => is_file(__DIR__.'/../public/build/manifest.json'),
     'vite_assets_readable' => false,
+    'vite_css_files' => [],
+    'vite_js_files' => [],
+    'asset_url' => getenv('ASSET_URL') ?: null,
     'home_render_ok' => false,
     'home_render_status' => null,
     'form_render_ok' => false,
@@ -46,14 +49,25 @@ $result = [
 if ($result['vite_manifest_exists']) {
     $manifest = json_decode((string) file_get_contents(__DIR__.'/../public/build/manifest.json'), true);
     $assetFiles = [];
+    $cssFiles = [];
+    $jsFiles = [];
 
     foreach (($manifest ?? []) as $entry) {
         if (isset($entry['file'])) {
             $assetFiles[] = $entry['file'];
+
+            if (str_ends_with($entry['file'], '.js')) {
+                $jsFiles[] = '/build/'.$entry['file'];
+            }
+
+            if (str_ends_with($entry['file'], '.css')) {
+                $cssFiles[] = '/build/'.$entry['file'];
+            }
         }
 
         foreach (($entry['css'] ?? []) as $cssFile) {
             $assetFiles[] = $cssFile;
+            $cssFiles[] = '/build/'.$cssFile;
         }
 
         foreach (($entry['assets'] ?? []) as $assetFile) {
@@ -67,6 +81,8 @@ if ($result['vite_manifest_exists']) {
 
     $result['vite_assets_readable'] = count($missingAssets) === 0;
     $result['vite_missing_assets'] = $missingAssets;
+    $result['vite_css_files'] = array_values(array_unique($cssFiles));
+    $result['vite_js_files'] = array_values(array_unique($jsFiles));
 }
 
 try {
@@ -81,6 +97,7 @@ try {
         $result['app_key_present'] = (bool) config('app.key');
         $result['app_env'] = config('app.env');
         $result['app_debug'] = config('app.debug');
+        $result['asset_url'] = config('app.asset_url');
         $result['db_connection'] = config('database.default');
         $result['database_url_present'] = (bool) (env('DATABASE_URL') ?: env('DB_URL'));
 
