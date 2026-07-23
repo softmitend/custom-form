@@ -39,6 +39,9 @@ $result = [
     'vite_assets_readable' => false,
     'vite_css_files' => [],
     'vite_js_files' => [],
+    'vite_css_route_ok' => false,
+    'vite_css_route_status' => null,
+    'vite_css_route_content_type' => null,
     'asset_url' => getenv('ASSET_URL') ?: null,
     'home_render_ok' => false,
     'home_render_status' => null,
@@ -130,6 +133,21 @@ try {
                 $result[$key.'_render_ok'] = $response->getStatusCode() < 500;
             } catch (Throwable $exception) {
                 $result[$key.'_render_error'] = $exception::class.': '.$exception->getMessage();
+            }
+        }
+
+        if (($result['vite_css_files'][0] ?? null) !== null) {
+            try {
+                $request = Request::create($result['vite_css_files'][0], 'GET');
+                $response = $app->handle($request);
+                $contentType = (string) $response->headers->get('content-type');
+
+                $result['vite_css_route_status'] = $response->getStatusCode();
+                $result['vite_css_route_content_type'] = $contentType;
+                $result['vite_css_route_ok'] = $response->getStatusCode() === 200
+                    && str_contains($contentType, 'text/css');
+            } catch (Throwable $exception) {
+                $result['vite_css_route_error'] = $exception::class.': '.$exception->getMessage();
             }
         }
     }

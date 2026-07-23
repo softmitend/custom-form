@@ -5,6 +5,34 @@ use App\Http\Controllers\Auth\AdminSessionController;
 use App\Http\Controllers\WebsiteProjectRequestController;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/build/{path}', function (string $path) {
+    $buildPath = realpath(public_path('build'));
+    $filePath = realpath(public_path('build/'.$path));
+
+    if (
+        $buildPath === false ||
+        $filePath === false ||
+        ! str_starts_with($filePath, $buildPath.DIRECTORY_SEPARATOR) ||
+        ! is_file($filePath)
+    ) {
+        abort(404);
+    }
+
+    $extension = strtolower(pathinfo($filePath, PATHINFO_EXTENSION));
+    $contentTypes = [
+        'css' => 'text/css; charset=utf-8',
+        'js' => 'application/javascript; charset=utf-8',
+        'json' => 'application/json; charset=utf-8',
+        'woff' => 'font/woff',
+        'woff2' => 'font/woff2',
+    ];
+
+    return response()->file($filePath, [
+        'content-type' => $contentTypes[$extension] ?? 'application/octet-stream',
+        'cache-control' => 'public, max-age=31536000, immutable',
+    ]);
+})->where('path', '.*');
+
 Route::get('/', function () {
     return view('welcome');
 });

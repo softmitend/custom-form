@@ -31,9 +31,6 @@
     ],
     "routes": [
         {
-            "handle": "filesystem"
-        },
-        {
             "src": "/_health",
             "dest": "/api/health.php"
         },
