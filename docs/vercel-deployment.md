@@ -47,6 +47,14 @@ Lalu cek:
 - `/admin/login` untuk login admin.
 - `/_health` untuk cek bootstrap Laravel, APP_KEY, database, query, dan manifest Vite.
 
+Jika `/_health` menampilkan `vite_manifest_exists: false`, jalankan:
+
+```bash
+npm run build
+```
+
+Pastikan folder `public/build` ikut ter-commit/deploy. Project ini sudah mengizinkan `public/build/manifest.json` dan `public/build/assets/*` lewat `.gitignore`, mengikuti pola project `invite-me`.
+
 ## Catatan
 
 - Vercel menjalankan Laravel lewat `api/index.php`.

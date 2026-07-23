@@ -1,6 +1,6 @@
 {
     "version": 2,
-    "installCommand": "npm install && npm run build",
+    "installCommand": "composer install --no-dev --prefer-dist --optimize-autoloader && npm install && npm run build",
     "buildCommand": "npm run build",
     "env": {
         "APP_ENV": "production",
