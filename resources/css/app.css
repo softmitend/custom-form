@@ -3006,15 +3006,14 @@ strong {
 }
 
 /* Final responsive polish */
-.site-footer {
-    justify-content: center;
-    text-align: center;
-}
-
 .site-footer span:first-child {
+    display: block;
+    max-width: 100%;
+    margin-inline: auto;
     color: #8a94a3;
     font-weight: 400;
     font-style: italic;
+    text-align: center;
 }
 
 .form-request-card > .back-link,
@@ -3061,21 +3060,6 @@ strong {
 }
 
 @media (max-width: 900px) {
-    .landing-shell {
-        padding: clamp(0.85rem, 3vw, 1.25rem);
-        place-items: center;
-    }
-
-    .landing-card {
-        min-height: auto;
-        border-radius: 14px;
-    }
-
-    .site-footer {
-        align-items: center;
-        padding: 1.4rem 1rem 1.6rem;
-    }
-
     .form-request-page {
         padding: 1.1rem clamp(0.85rem, 4vw, 1.5rem) 1.75rem;
     }
@@ -3107,20 +3091,6 @@ strong {
 }
 
 @media (max-width: 520px) {
-    .landing-shell {
-        padding: 0.8rem;
-    }
-
-    .landing-card {
-        border-radius: 12px;
-    }
-
-    .hero-band,
-    .content-panel {
-        padding-left: 1rem;
-        padding-right: 1rem;
-    }
-
     .form-request-page {
         padding: 0.85rem 0.75rem 1.4rem;
     }
