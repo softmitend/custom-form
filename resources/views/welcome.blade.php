@@ -74,8 +74,7 @@
             </div>
 
             <footer class="site-footer">
-                <span>@acalysis</span>
-                <span>Website custom, dibuat lebih personal.</span>
+                <span>Developed by @acalysis (x account)</span>
             </footer>
         </section>
     </main>
