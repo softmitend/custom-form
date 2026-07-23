@@ -36,11 +36,38 @@ $result = [
     'db_ok' => false,
     'form_requests_query_ok' => false,
     'vite_manifest_exists' => is_file(__DIR__.'/../public/build/manifest.json'),
+    'vite_assets_readable' => false,
     'home_render_ok' => false,
     'home_render_status' => null,
     'form_render_ok' => false,
     'form_render_status' => null,
 ];
+
+if ($result['vite_manifest_exists']) {
+    $manifest = json_decode((string) file_get_contents(__DIR__.'/../public/build/manifest.json'), true);
+    $assetFiles = [];
+
+    foreach (($manifest ?? []) as $entry) {
+        if (isset($entry['file'])) {
+            $assetFiles[] = $entry['file'];
+        }
+
+        foreach (($entry['css'] ?? []) as $cssFile) {
+            $assetFiles[] = $cssFile;
+        }
+
+        foreach (($entry['assets'] ?? []) as $assetFile) {
+            $assetFiles[] = $assetFile;
+        }
+    }
+
+    $missingAssets = array_values(array_filter(array_unique($assetFiles), function (string $assetFile): bool {
+        return ! is_file(__DIR__.'/../public/build/'.$assetFile);
+    }));
+
+    $result['vite_assets_readable'] = count($missingAssets) === 0;
+    $result['vite_missing_assets'] = $missingAssets;
+}
 
 try {
     if (is_file($autoload)) {
